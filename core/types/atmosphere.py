@@ -10,6 +10,22 @@ class Atmosphere(ABC):
         pass
 
     @abstractmethod
+    def getHeight(self) -> ndarray:
+        pass
+
+    @abstractmethod
+    def getTemperature(self) -> ndarray:
+        pass
+
+    @abstractmethod
+    def getPressure(self) -> ndarray:
+        pass
+
+    @abstractmethod
+    def getDensity(self) -> ndarray:
+        pass
+
+    @abstractmethod
     def T(self, h: Union[float, ndarray]) -> Union[float, ndarray]:
         pass
 

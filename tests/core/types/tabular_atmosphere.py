@@ -1,4 +1,4 @@
-from core.types.tabularatmos import TabularAtmosphere
+from core.types.tabular_atmosphere import TabularAtmosphere
 
 
 def test_temperature():
@@ -25,3 +25,15 @@ def test_invalid_height():
         assert False
     except OutOfRangeException:
         assert True
+
+
+def test_using_array():
+    from numpy import array
+
+    h = array([0, 100, 500, 800])
+    atmo = TabularAtmosphere('../../atmosphere_test.txt', split='\t')
+    temp = atmo.T(h)
+    if any(temp == [290., 300., 320., 340.]) is True:
+        assert True
+    else:
+        assert False

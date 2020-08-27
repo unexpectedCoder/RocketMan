@@ -1,1 +1,1 @@
-from .atmosphereparser import AtmosphereTxtFileParser
+from .atmosphere_parser import AtmosphereTxtFileParser

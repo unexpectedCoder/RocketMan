@@ -1,2 +1,2 @@
 from .atmosphere import Atmosphere
-from .tabularatmos import TabularAtmosphere
+from .tabular_atmosphere import TabularAtmosphere

@@ -14,6 +14,7 @@ class TabularAtmosphere(Atmosphere):
         self._standard = standard
         self._parser = AtmosphereTxtFileParser(src_path, split, with_head)
         self._hRange = self.determineHeightRange(self._parser.getHeightData())
+        self._hData, self._TData, self._pData, self._rhoData = None, None, None, None
         self._TFunc, self._pFunc, self._rhoFunc = self._interpolateData()
 
     def __copy__(self):
@@ -33,10 +34,10 @@ class TabularAtmosphere(Atmosphere):
         return np.array((height_data[0], height_data[-1]))
 
     def _interpolateData(self) -> Tuple[interp1d, interp1d, interp1d]:
-        hData, TData, pData, rhoData = self._parser.readSrcFile()
-        return interp1d(hData, TData, kind='cubic'), \
-               interp1d(hData, pData, kind='linear'), \
-               interp1d(hData, rhoData, kind='linear')
+        self._hData, self._TData, self._pData, self._rhoData = self._parser.readSrcFile()
+        return interp1d(self._hData, self._TData, kind='cubic'), \
+               interp1d(self._hData, self._pData, kind='linear'), \
+               interp1d(self._hData, self._rhoData, kind='linear')
 
     def getParser(self) -> AtmosphereTxtFileParser:
         """Используемый парсер source-файла."""
@@ -45,6 +46,22 @@ class TabularAtmosphere(Atmosphere):
     def getHeightRange(self) -> np.ndarray:
         """Диапазон высот."""
         return self._hRange
+
+    def getHeight(self) -> np.ndarray:
+        """Массив высоты."""
+        return self._hData
+
+    def getTemperature(self) -> np.ndarray:
+        """Массивы температуры."""
+        return self._TData
+
+    def getPressure(self) -> np.ndarray:
+        """Массив давления."""
+        return self._pData
+
+    def getDensity(self) -> np.ndarray:
+        """Массив плотности."""
+        return self._rhoData
 
     def T(self, h: Union[int, float, np.ndarray]) -> Union[float, np.ndarray]:
         """Интерполированное значение температуры."""
