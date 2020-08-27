@@ -1,0 +1,4 @@
+.idea/
+*.pytest*
+*__pycache__/
+*.txt
