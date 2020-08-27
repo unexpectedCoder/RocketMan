@@ -1,1 +1,2 @@
-from .out_of_range import OutOfRangeException
+from .custom_exception import CustomException
+from .exception import *
