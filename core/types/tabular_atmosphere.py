@@ -92,21 +92,3 @@ class TabularAtmosphere(Atmosphere):
     def getStandard(self) -> str:
         """Используемый стандарт параметров атмосферы."""
         return self._standard
-
-
-# Test Drive
-if __name__ == '__main__':
-    from copy import copy
-
-    atmos = TabularAtmosphere('../../tests/atmosphere_test.txt', split='\t')
-    print(atmos)
-
-    atmosOther = copy(atmos)
-    atmosOther.changeStandard("АЗАЗА-4 миллиона")
-    print(atmosOther)
-    print(atmos)
-
-    try:
-        atmos.p(-1)
-    except OutOfRangeException as ex:
-        print(ex)

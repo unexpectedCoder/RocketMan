@@ -1,8 +1,8 @@
-from core.exceptions.exception import SurfaceNameException
-from core.types.coordinate import Coordinate
-
 from typing import NoReturn, Union
 import numpy as np
+
+from ..exceptions.exception import SurfaceNameException
+from .coordinate import Coordinate
 
 
 class Velocity(Coordinate):
@@ -66,25 +66,3 @@ class Velocity(Coordinate):
             return self.angle_to_xy
         raise SurfaceNameException(f"Параметр 'to_surface' не принимает значение {to_surface}!",
                                    src=self.__class__.__name__)
-
-
-# Test Drive
-if __name__ == '__main__':
-    print(Velocity(10, 5, 25))
-
-    v = Velocity.fromMagnitudeAndAngle(1, 45, 0)
-    print(f"В плоскости стрельбы под 45: {v}")
-    v = Velocity.fromMagnitudeAndAngle(1, 135, 0)
-    print(f"В плоскости стрельбы под 135: {v}")
-    v = Velocity.fromMagnitudeAndAngle(1, -45, 0)
-    print(f"В плоскости стрельбы под -45: {v}")
-    v = Velocity.fromMagnitudeAndAngle(1, 315, 0)
-    print(f"В плоскости стрельбы под 315: {v}")
-    v = Velocity.fromMagnitudeAndAngle(1, 225, 0)
-    print(f"В плоскости стрельбы под 225: {v}")
-    v = Velocity.fromMagnitudeAndAngle(1, 45, 45)
-    print(f"Общий случай 45 и 45: {v}")
-    v = Velocity.fromMagnitudeAndAngle(1, 45, 135)
-    print(f"Общий случай 45 и 135: {v}")
-    v = Velocity.fromMagnitudeAndAngle(1, 210, 0)
-    print(f"В плоскости стрельбы под 210: {v}")

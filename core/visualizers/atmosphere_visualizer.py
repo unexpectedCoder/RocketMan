@@ -3,8 +3,8 @@ from typing import Tuple, Union
 import matplotlib.pyplot as plt
 import numpy as np
 
-from core.visualizers.visualizer import Visualizer
-from core.types.atmosphere import Atmosphere
+from .visualizer import Visualizer
+from ..types.atmosphere import Atmosphere
 
 
 class AtmosphereVisualizer(Visualizer):
@@ -54,10 +54,3 @@ class AtmosphereVisualizer(Visualizer):
         plt.ylabel(ylabel)
         plt.title(title)
         plt.grid(grid)
-
-
-# Test Drive
-if __name__ == '__main__':
-    from core.types.tabular_atmosphere import TabularAtmosphere
-    vis = AtmosphereVisualizer(TabularAtmosphere('../../tests/atmosphere_test.txt'))
-    vis.display()
