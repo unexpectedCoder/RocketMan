@@ -24,7 +24,7 @@ class Cone(Geometry):
 
     @property
     def size(self) -> dict:
-        return {'d1': self._d1, 'd2': self._d2, 'h': self._h}
+        return {'d1': self._d1, 'd2': self._d2, 'h': self._h, 'volume': self.volume}
 
     @property
     def volume(self) -> float:

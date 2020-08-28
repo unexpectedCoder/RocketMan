@@ -14,3 +14,8 @@ class SurfaceNameException(CustomException):
 class BodySizeException(CustomException):
     """Исключение в случае некорректного размера тела."""
     pass
+
+
+class OgiveSizeException(CustomException):
+    """Исключение в случае некорректного размера оживала."""
+    pass

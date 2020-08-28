@@ -21,7 +21,7 @@ class Cylinder(Geometry):
 
     @property
     def size(self) -> dict:
-        return {'d': self._d, 'l': self._l}
+        return {'d': self._d, 'l': self._l, 'volume': self.volume}
 
     @property
     def volume(self) -> float:

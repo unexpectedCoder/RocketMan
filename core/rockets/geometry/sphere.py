@@ -26,7 +26,7 @@ class Sphere(Geometry):
 
     @property
     def size(self) -> dict:
-        return {'d': self._d, 'h': self._h}
+        return {'d': self._d, 'h': self._h, 'volume': self.volume}
 
     @property
     def volume(self) -> float:
