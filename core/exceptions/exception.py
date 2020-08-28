@@ -9,3 +9,8 @@ class OutOfRangeException(CustomException):
 class SurfaceNameException(CustomException):
     """Исключение в случае использования несуществующего имени поверхности."""
     pass
+
+
+class BodySizeException(CustomException):
+    """Исключение в случае некорректного размера тела."""
+    pass
