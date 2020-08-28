@@ -1,6 +1,6 @@
-from abc import ABC, abstractmethod
+from abc import ABC, abstractproperty
 
-# from core.exceptions.exception import BodySizeException
+from core.exceptions.exception import BodySizeException
 
 
 class Geometry(ABC):
@@ -8,32 +8,28 @@ class Geometry(ABC):
     _name = None
     _size = None
 
-    # def __init__(self,):
-    #     self._name = "NO NAME"
-    #     self._size = None
-
-    # def _checkSizeForNegative(self):
-    #     for key in self._size.keys():
-    #         if self._size[key] < 0:
-    #             raise BodySizeException("Что-то не так с геометрическими размерами тела - "
-    #                                     "они должны быть неотрицательными!",
-    #                                     src=self.__class__.__name__)
+    def checkSize(self, *args):
+        for arg in args:
+            if arg < 0:
+                raise BodySizeException("размер не может быть отрицательным",
+                                        src=self.__class__.__name__)
 
     def __repr__(self):
         s = self._name
         for key in self._size.keys():
             s += f"\n\t {key} = {self._size[key]} [мм]"
 
+    @property
     def getName(self) -> str:
         """Название тела."""
         return self._name
 
-    @abstractmethod
-    def getSize(self) -> dict:
+    @abstractproperty
+    def size(self) -> dict:
         """Размеры тела."""
         pass
 
-    @abstractmethod
-    def getVolume(self) -> float:
+    @abstractproperty
+    def volume(self) -> float:
         """Объём тела."""
         pass

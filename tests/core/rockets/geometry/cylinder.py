@@ -10,9 +10,8 @@ def test_invalid_init():
         assert True
 
 
-def test_get_size():
-    size = Cylinder(0.5, 1.75).getSize()
-    assert size == {'d': 0.5, 'l': 1.75}
+def test_size():
+    assert Cylinder(0.5, 1.75).size == {'d': 0.5, 'l': 1.75}
 
 
 def test_diameter_property():
@@ -27,3 +26,7 @@ def test_length_property():
     assert c.length == 20.5
     c.length = 5
     assert c.length == 5
+
+
+def test_volume():
+    assert round(Cylinder(1.5, 5).volume, 10) == 8.8357293382

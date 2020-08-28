@@ -1,51 +1,65 @@
-from src.geometry.body import Body
-from src.core.errors import BodySizeError
+from numpy import pi
+from typing import Union
 
-from math import pi
+from core.rockets.geometry.geometry import Geometry
 
 
-class Cone(Body):
-    """Конус (полный и усеченный)."""
-    type = 'cone'
+class Cone(Geometry):
+    """Геометрия конуса (полного и усеченного)."""
 
-    def __init__(self, size: dict):
-        Body.__init__(self, size)
-        self._check_size()
+    def __init__(self,
+                 d1: Union[int, float],
+                 d2: Union[int, float],
+                 height: Union[int, float]):
+        self.checkSize(d1, d2, height)
+        self._name = "Конус"
+        self._d1, self._d2, self._h = d1, d2, height
 
-    def _check_size(self):
-        if self.size['d1'] > self.size['d2']:
-            self.size['d1'], self.size['d2'] = self.size['d2'], self.size['d1']
-        keys = self.size.keys()
-        if 'd1' not in keys or 'd2' not in keys or 'h' not in keys:
-            raise BodySizeError("Неправильные ключи переданного словаря размера! " \
-                                "Должны быть ключи 'd1', 'd2' (диаметры оснований) и 'h' (высота)...", self.__class__)
-
-    def get_volume(self) -> float:
-        return 1/12*pi*self.size['h']*(self.size['d1']**2 + self.size['d2']**2 + self.size['d1']*self.size['d2'])
-
-    @property
-    def diameter_smaller(self) -> float:
-        return self.size['d1']
-
-    @diameter_smaller.setter
-    def diameter_smaller(self, d: float):
-        if d > 0:
-            self.size['d1'] = d
+    def __repr__(self):
+        return f"Тело {self._name}:" \
+               f"\n - диаметр основания #1 d1 = {self._d1}" \
+               f"\n - диаметр основания #2 d2 = {self._d2}" \
+               f"\n - высота h = {self._h}" \
+               f"\n - объём V = {self.volume}"
 
     @property
-    def diameter_larger(self) -> float:
-        return self.size['d2']
+    def size(self) -> dict:
+        return {'d1': self._d1, 'd2': self._d2, 'h': self._h}
 
-    @diameter_larger.setter
-    def diameter_larger(self, d: float):
-        if d > 0:
-            self.size['d2'] = d
+    @property
+    def volume(self) -> float:
+        return 1/12*pi*self._h*(self._d1**2 + self._d2**2 + self._d1*self._d2)
+
+    @property
+    def diameterOne(self) -> float:
+        return self._d1
+
+    @diameterOne.setter
+    def diameterOne(self, d1: float):
+        if d1 >= 0:
+            self._d1 = d1
+
+    @property
+    def diameterTwo(self) -> float:
+        return self._d2
+
+    @diameterTwo.setter
+    def diameterTwo(self, d2: float):
+        if d2 >= 0:
+            self._d2 = d2
 
     @property
     def height(self) -> float:
-        return self.size['h']
+        return self._h
 
     @height.setter
     def height(self, h: float):
         if h > 0:
-            self.size['h'] = h
+            self._h = h
+
+
+# Test Drive
+if __name__ == '__main__':
+    c = Cone(1.5, 2, 3.15)
+    print(c)
+    print(c.size)
