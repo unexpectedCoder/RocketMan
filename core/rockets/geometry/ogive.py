@@ -30,11 +30,11 @@ class Ogive(Geometry):
     def volume(self) -> float:
         r = 0.5*self._d
         l = self._l
-        y0 = sqrt(r**2 - l**2)
+        R = (r + l)**2 / (2*r) - l
         if l > r:
             raise OgiveSizeException("длина оживала не должна превышать его радиус",
                                      src=self.__class__.__name__)
-        return pi * (l*((r**2 - y0**2) - l**2 / 3 + y0*sqrt(r**2 - l**2)) + y0*arcsin(l/r) * r**2)
+        return pi*(l*(R**2 - l**2 / 3) + R**2 * sqrt(R**2 - l**2) * arcsin(l/R))
 
     @property
     def diameter(self) -> float:
