@@ -30,3 +30,11 @@ def test_length_property():
 
 def test_volume():
     assert round(Cylinder(1.5, 5).volume, 10) == 8.8357293382
+
+
+def test_repr():
+    c = Cylinder(10, 20)
+    print()
+    print(c)
+    print(c.size)
+    assert True

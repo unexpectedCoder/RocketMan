@@ -47,3 +47,15 @@ def test_height_property():
     assert s.segmentHeight == 5
     s.segmentHeight = 200
     assert s.segmentHeight == 5
+
+
+def test_repr():
+    s = Sphere(10, 2)
+    print()
+    print(s)
+    print(s.size)
+
+    s = Sphere(10)
+    print()
+    print(s)
+    print(s.size)

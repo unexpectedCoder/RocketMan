@@ -49,3 +49,11 @@ def test_height_property():
     assert c.height == 3.1
     c.height = 10
     assert c.height == 10
+
+
+def test_repr():
+    c = Cone(1.5, 2, 3.15)
+    print()
+    print(c)
+    print(c.size)
+    assert True

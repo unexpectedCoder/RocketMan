@@ -1,7 +1,7 @@
 from numpy import pi
 from typing import Union
 
-from core.rockets.geometry.geometry import Geometry
+from .geometry import Geometry
 
 
 class Sphere(Geometry):
@@ -51,14 +51,3 @@ class Sphere(Geometry):
             self._h = h
         else:
             self._h = self._d
-
-
-# Test Drive
-if __name__ == '__main__':
-    s = Sphere(10, 2)
-    print(s)
-    print(s.size)
-
-    s = Sphere(10)
-    print(s)
-    print(s.size)

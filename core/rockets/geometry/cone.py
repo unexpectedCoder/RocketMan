@@ -1,7 +1,7 @@
 from numpy import pi
 from typing import Union
 
-from core.rockets.geometry.geometry import Geometry
+from .geometry import Geometry
 
 
 class Cone(Geometry):
@@ -16,7 +16,7 @@ class Cone(Geometry):
         self._d1, self._d2, self._h = d1, d2, height
 
     def __repr__(self):
-        return f"Тело {self._name}:" \
+        return f"Тело '{self._name}':" \
                f"\n - диаметр основания #1 d1 = {self._d1}" \
                f"\n - диаметр основания #2 d2 = {self._d2}" \
                f"\n - высота h = {self._h}" \
@@ -56,10 +56,3 @@ class Cone(Geometry):
     def height(self, h: float):
         if h > 0:
             self._h = h
-
-
-# Test Drive
-if __name__ == '__main__':
-    c = Cone(1.5, 2, 3.15)
-    print(c)
-    print(c.size)

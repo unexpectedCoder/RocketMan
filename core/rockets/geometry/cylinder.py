@@ -1,7 +1,7 @@
 from numpy import pi
 from typing import Union
 
-from core.rockets.geometry.geometry import Geometry
+from .geometry import Geometry
 
 
 class Cylinder(Geometry):
@@ -44,10 +44,3 @@ class Cylinder(Geometry):
     def length(self, length: float):
         if length > 0:
             self._l = length
-
-
-# Test Drive
-if __name__ == '__main__':
-    c = Cylinder(10, 20)
-    print(c)
-    print(c.size)
