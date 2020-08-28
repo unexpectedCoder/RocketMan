@@ -42,13 +42,15 @@ class Sphere(Geometry):
             self._d = d
 
     @property
-    def sectorHeight(self) -> float:
+    def segmentHeight(self) -> float:
         return self._h
 
-    @sectorHeight.setter
-    def sectorHeight(self, h: float):
-        if h > 0:
+    @segmentHeight.setter
+    def segmentHeight(self, h: float):
+        if 0 <= h <= self._d:
             self._h = h
+        else:
+            self._h = self._d
 
 
 # Test Drive

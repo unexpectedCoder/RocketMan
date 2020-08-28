@@ -2,7 +2,7 @@ from core.rockets.geometry.cylinder import Cylinder
 from core.exceptions.exception import BodySizeException
 
 
-def test_invalid_init():
+def test_incorrect_init():
     try:
         Cylinder(-3, 2)
         assert False

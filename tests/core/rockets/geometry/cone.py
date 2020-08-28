@@ -10,6 +10,14 @@ def test_init_with_zero_d1():
         assert False
 
 
+def test_incorrect_init():
+    try:
+        Cone(0, -.1, 2)
+        assert False
+    except BodySizeException:
+        assert True
+
+
 def test_size():
     assert Cone(1.5, 2, 3.15).size == {'d1': 1.5, 'd2': 2, 'h': 3.15}
 
