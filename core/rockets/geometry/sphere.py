@@ -1,42 +1,62 @@
-from src.geometry.body import Body
-from src.core.errors import BodySizeError
+from numpy import pi
+from typing import Union
 
-from math import pi
+from core.rockets.geometry.geometry import Geometry
 
 
-class Sphere(Body):
-    """Сфера (полная и сегмент)."""
-    type = 'sphere'
+class Sphere(Geometry):
+    """Геометрия сферы (полной и сегмента)."""
 
-    def __init__(self, size: dict):
-        Body.__init__(self, size)
-        self._check_size()
+    def __init__(self, d: Union[int, float], h: Union[int, float, None] = None):
+        self.checkSize(d, h) if h else self.checkSize(d)
+        self._name = "Сфера"
+        self._d = d
+        if h is None or h > d:
+            self._h = d
+        else:
+            self._h = h
 
-    def _check_size(self):
-        keys = self.size.keys()
-        if 'd' not in keys:
-            raise BodySizeError("Неправильные ключи переданного словаря размера! " \
-                                "Должны быть ключи 'd' (диаметр) (опционально - 'h' (высота сектора))...", self.__class__)
-        if 'h' not in keys or self.size['h'] > self.size['d']:
-            self.size['h'] = self.size['d']                         # Случай полной сферы
+    def __repr__(self):
+        s = f"Тело {self._name}:" \
+            f"\n - диаметр d = {self._d}"
+        if self._h != self._d:
+            s += f"\n - высота сегмента h = {self._h}"
+        s += f"\n - объем V = {self.volume}"
+        return s
 
-    def get_volume(self) -> float:
-        return pi * self.size['h']**2 * (0.5*self.size['d'] - self.size['h'] / 3)
+    @property
+    def size(self) -> dict:
+        return {'d': self._d, 'h': self._h}
+
+    @property
+    def volume(self) -> float:
+        return pi * self._h**2 * (0.5*self._d - self._h / 3)
 
     @property
     def diameter(self) -> float:
-        return self.size['d']
+        return self._d
 
     @diameter.setter
     def diameter(self, d: float):
         if d > 0:
-            self.size['d'] = d
+            self._d = d
 
     @property
-    def sector_height(self) -> float:
-        return self.size['h']
+    def sectorHeight(self) -> float:
+        return self._h
 
-    @sector_height.setter
-    def sector_height(self, h: float):
+    @sectorHeight.setter
+    def sectorHeight(self, h: float):
         if h > 0:
-            self.size['h'] = h
+            self._h = h
+
+
+# Test Drive
+if __name__ == '__main__':
+    s = Sphere(10, 2)
+    print(s)
+    print(s.size)
+
+    s = Sphere(10)
+    print(s)
+    print(s.size)

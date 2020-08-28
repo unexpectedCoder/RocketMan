@@ -6,6 +6,7 @@ from core.rockets.geometry.geometry import Geometry
 
 class Cylinder(Geometry):
     """Геометрия цилиндра."""
+
     def __init__(self, d: Union[int, float], length: Union[int, float]):
         self.checkSize(d, length)
         self._name = "Цилиндр"
