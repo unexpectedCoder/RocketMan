@@ -19,3 +19,8 @@ class BodySizeException(CustomException):
 class OgiveSizeException(CustomException):
     """Исключение в случае некорректного размера оживала."""
     pass
+
+
+class InvalidConstructArgumentException(CustomException):
+    """Исключение в случае некоррекного аргумента в конструкторе класса."""
+    pass
